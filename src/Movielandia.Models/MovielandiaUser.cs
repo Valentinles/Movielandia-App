@@ -14,6 +14,8 @@ namespace Movielandia.Models
             this.Orders = new HashSet<Order>();
         }
 
+        public string MovielandiaUsername { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

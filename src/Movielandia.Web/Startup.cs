@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Movielandia.Data;
 using Movielandia.Models;
+using Movielandia.Common.Middlewares;
 
 namespace Movielandia.Web
 {
@@ -47,7 +48,8 @@ namespace Movielandia.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             })
-                   .AddEntityFrameworkStores<MovielandiaDbContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<MovielandiaDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -65,6 +67,8 @@ namespace Movielandia.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseSeedAdminMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
