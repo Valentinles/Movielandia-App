@@ -20,18 +20,12 @@ namespace Movielandia.Web.Controllers
             this.mapper = mapper;
         }
 
-        public async Task<IActionResult> All()
+        public IActionResult All()
         {
-            var allMovies = this.movieService.GetAll();
-            var viewModels = new List<AllMoviesViewModel>();
+            var movies = (this.movieService.GetAll())
+                .Select(this.mapper.Map<AllMoviesViewModel>);
 
-            foreach (var movie in allMovies)
-            {
-                var movieViewModel = this.mapper.Map<AllMoviesViewModel>(movie);
-                viewModels.Add(movieViewModel);
-            }
-
-            return View(viewModels);
+            return View(movies);
         }
     }
 }
