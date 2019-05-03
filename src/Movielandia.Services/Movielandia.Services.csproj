@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Movielandia.Common\Movielandia.Common.csproj" />
     <ProjectReference Include="..\Movielandia.Data\Movielandia.Data.csproj" />
   </ItemGroup>
 

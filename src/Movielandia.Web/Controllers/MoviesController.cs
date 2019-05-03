@@ -27,5 +27,19 @@ namespace Movielandia.Web.Controllers
 
             return View(movies);
         }
+
+        public IActionResult Details(int id)
+        {
+            var movie = this.movieService.ShowDetails(id);
+
+            if (movie==null)
+            {
+                return NotFound();
+            }
+            
+            var movieView = this.mapper.Map<MovieViewModel>(movie);
+
+            return this.View(movieView);
+        }
     }
 }

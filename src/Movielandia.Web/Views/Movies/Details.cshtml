@@ -1,0 +1,12 @@
+﻿@model Movielandia.Common.ViewModels.MovieViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <p>@Model.Title</p>
+    <img src="@Model.CoverUrl" width="300"/>
+    <p>@Model.Storyline</p>
+</div>
