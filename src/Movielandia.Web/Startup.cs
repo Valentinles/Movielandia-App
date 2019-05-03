@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Movielandia.Data;
 using Movielandia.Models;
 using Movielandia.Common.Middlewares;
+using AutoMapper;
 
 namespace Movielandia.Web
 {
@@ -50,6 +51,9 @@ namespace Movielandia.Web
             })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MovielandiaDbContext>();
+
+            //my services
+            services.AddAutoMapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
