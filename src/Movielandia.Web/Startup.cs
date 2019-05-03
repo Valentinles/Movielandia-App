@@ -15,6 +15,8 @@ using Movielandia.Data;
 using Movielandia.Models;
 using Movielandia.Common.Middlewares;
 using AutoMapper;
+using Movielandia.Services.Implementations;
+using Movielandia.Services.Interfaces;
 
 namespace Movielandia.Web
 {
@@ -54,6 +56,8 @@ namespace Movielandia.Web
 
             //my services
             services.AddAutoMapper();
+
+            services.AddScoped<IMovieService, MovieService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

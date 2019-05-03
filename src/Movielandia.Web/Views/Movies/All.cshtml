@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Movielandia.Common.ViewModels.AllMoviesViewModel>
+@{
+    ViewData["Title"] = "All";
+}
+
+<h2>All</h2>
+
+@foreach (var movie in Model)
+{
+    <h2>@movie.Title</h2>
+    <h2>@movie.Genre</h2>
+}
