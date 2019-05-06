@@ -20,12 +20,12 @@ namespace Movielandia.Data
 
         public DbSet<Order> Orders { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Order>()
-                .HasKey(o => new { o.UserId, o.MovieId });
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    builder.Entity<Order>()
+        //        .HasKey(o => new { o.UserId, o.MovieId });
 
-            base.OnModelCreating(builder);
-        }
+        //    base.OnModelCreating(builder);
+        //}
     }
 }

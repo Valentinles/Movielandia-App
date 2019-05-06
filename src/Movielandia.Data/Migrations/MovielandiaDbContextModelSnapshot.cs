@@ -219,15 +219,23 @@ namespace Movielandia.Data.Migrations
 
             modelBuilder.Entity("Movielandia.Models.Order", b =>
                 {
-                    b.Property<string>("UserId");
-
-                    b.Property<int>("MovieId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.HasKey("UserId", "MovieId");
+                    b.Property<int>("MovieId");
+
+                    b.Property<int>("TicketCount");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -286,8 +294,7 @@ namespace Movielandia.Data.Migrations
 
                     b.HasOne("Movielandia.Models.MovielandiaUser", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

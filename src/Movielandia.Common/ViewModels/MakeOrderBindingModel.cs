@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Movielandia.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Movielandia.Models
+namespace Movielandia.Common.ViewModels
 {
-    public class Order
+    public class MakeOrderBindingModel
     {
         public int Id { get; set; }
 

@@ -16,6 +16,7 @@ namespace Movielandia.Common.Mapper
         {
             this.CreateMap<Movie, MovieViewModel>();
             this.CreateMap<Movie, AllMoviesViewModel>();
+            this.CreateMap<Order, MakeOrderBindingModel>();
         }
 
     }

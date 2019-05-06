@@ -25,19 +25,22 @@ namespace Movielandia.Web.Controllers
             var movies = (this.movieService.GetAll())
                 .Select(this.mapper.Map<AllMoviesViewModel>);
 
-            return View(movies);
+            return View(new MovieOrderViewModel()
+            {
+                Movies = movies
+            });
         }
 
         public IActionResult Details(int id)
         {
-            var movie = this.movieService.ShowDetails(id);
+            var movie =  this.movieService.ShowDetails(id);
 
             if (movie==null)
             {
-                return NotFound();
+                return  NotFound();
             }
             
-            var movieView = this.mapper.Map<MovieViewModel>(movie);
+            var movieView =  this.mapper.Map<MovieViewModel>(movie);
 
             return this.View(movieView);
         }

@@ -10,8 +10,8 @@ using Movielandia.Data;
 namespace Movielandia.Data.Migrations
 {
     [DbContext(typeof(MovielandiaDbContext))]
-    [Migration("20190501072329_ProjectModelsAdded")]
-    partial class ProjectModelsAdded
+    [Migration("20190506134215_MigrationsAdded")]
+    partial class MigrationsAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,6 +141,8 @@ namespace Movielandia.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CoverUrl");
+
                     b.Property<string>("Creator");
 
                     b.Property<int>("Genre");
@@ -183,6 +185,8 @@ namespace Movielandia.Data.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
+                    b.Property<string>("MovielandiaUsername");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
@@ -217,15 +221,23 @@ namespace Movielandia.Data.Migrations
 
             modelBuilder.Entity("Movielandia.Models.Order", b =>
                 {
-                    b.Property<string>("UserId");
-
-                    b.Property<int>("MovieId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.HasKey("UserId", "MovieId");
+                    b.Property<int>("MovieId");
+
+                    b.Property<int>("TicketCount");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -284,8 +296,7 @@ namespace Movielandia.Data.Migrations
 
                     b.HasOne("Movielandia.Models.MovielandiaUser", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

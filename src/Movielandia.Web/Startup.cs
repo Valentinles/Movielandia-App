@@ -54,8 +54,11 @@ namespace Movielandia.Web
             })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MovielandiaDbContext>();
+
             services.AddAutoMapper();
+
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

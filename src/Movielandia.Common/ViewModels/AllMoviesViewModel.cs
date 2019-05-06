@@ -7,8 +7,10 @@ using System.Text;
 
 namespace Movielandia.Common.ViewModels
 {
-    public class AllMoviesViewModel : IMapWith<Movie>
+    public class AllMoviesViewModel
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public Genre Genre { get; set; }

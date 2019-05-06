@@ -3,16 +3,15 @@ using Movielandia.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Movielandia.Services.Interfaces
 {
-    public interface IMovieService
+    public interface IOrderService
     {
-        IEnumerable<Movie> GetAll();
+        IEnumerable<Order> All();
 
-        Movie ShowDetails(int id);
+        IEnumerable<Order> AllByUser();
 
-        Movie GetById(int id);
+        bool MakeOrder(MakeOrderBindingModel model, string userName);
     }
 }

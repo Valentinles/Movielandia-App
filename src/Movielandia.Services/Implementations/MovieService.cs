@@ -20,9 +20,16 @@ namespace Movielandia.Services.Implementations
 
         public IEnumerable<Movie> GetAll() => this.context.Movies;
 
+        public Movie GetById(int id)
+        {
+            var movie = this.context.Movies.Find(id);
+
+            return movie;
+        }
+
         public Movie ShowDetails(int id)
         {
-            var movie =  this.context.Movies.FirstOrDefault(m => m.Id == id);
+            var movie = this.context.Movies.FirstOrDefault(m => m.Id == id);
 
             return movie;
         }
