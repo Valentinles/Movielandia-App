@@ -20,6 +20,25 @@ namespace Movielandia.Web.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(AddMovieBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+
+            var movie = this.movieService.Add(model);
+
+            return RedirectToAction("All", "Movies");
+        }
+
         public IActionResult All()
         {
             var movies = (this.movieService.GetAll())

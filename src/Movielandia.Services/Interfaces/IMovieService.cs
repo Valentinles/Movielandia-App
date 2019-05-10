@@ -13,6 +13,6 @@ namespace Movielandia.Services.Interfaces
 
         Movie ShowDetails(int id);
 
-        Movie GetById(int id);
+        bool Add(AddMovieBindingModel model);
     }
 }

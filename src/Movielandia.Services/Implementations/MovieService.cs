@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Movielandia.Common.ViewModels;
@@ -14,8 +15,22 @@ namespace Movielandia.Services.Implementations
 {
     public class MovieService : DataService, IMovieService
     {
-        public MovieService(MovielandiaDbContext context) : base(context)
+        private readonly IMapper mapper;
+
+        public MovieService(MovielandiaDbContext context, IMapper mapper) : base(context)
         {
+            this.mapper = mapper;
+        }
+
+        public bool Add(AddMovieBindingModel model)
+        {
+            var movie = this.mapper.Map<Movie>(model);
+
+            this.context.Movies.Add(movie);
+
+            this.context.SaveChanges();
+
+            return true;
         }
 
         public IEnumerable<Movie> GetAll() => this.context.Movies;
