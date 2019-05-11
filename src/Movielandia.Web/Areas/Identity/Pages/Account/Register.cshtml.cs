@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -106,7 +107,12 @@ namespace Movielandia.Web.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
+                    if (this._userManager.Users.Count() == 1)
+                    {
+                        await this._userManager.AddToRoleAsync(user, "Admin");
+                    }
                     await _signInManager.SignInAsync(user, isPersistent: false);
+
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Movielandia.Common;
 using Movielandia.Common.ViewModels;
 using Movielandia.Services.Interfaces;
 
 namespace Movielandia.Web.Controllers
 {
+//[Authorize]
     public class MoviesController : Controller
     {
         private readonly IMovieService movieService;
@@ -20,12 +23,14 @@ namespace Movielandia.Web.Controllers
             this.mapper = mapper;
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public IActionResult Add()
         {
             return this.View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Add(AddMovieBindingModel model)
         {

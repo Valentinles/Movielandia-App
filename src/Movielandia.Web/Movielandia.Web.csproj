@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Movielandia.Services\Movielandia.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Orders\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Movielandia.Common.Mapper;
+using Movielandia.Models;
 using Movielandia.Models.Enums;
 using System;
 using System.Collections.Generic;

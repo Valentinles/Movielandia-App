@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Movielandia.Common.ViewModels;
 using Movielandia.Data;
 using Movielandia.Models;
@@ -19,20 +20,42 @@ namespace Movielandia.Services.Implementations
             this.mapper = mapper;
         }
 
-
-        public IEnumerable<Order> All()
+        public IEnumerable<OrdersViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var allOrders = (from o in context.Orders
+                       join m in context.Movies
+                       on o.MovieId equals m.Id
+                       select new OrdersViewModel
+                       {
+                           MovieId=m.Id,
+                           Movie=m.Title,
+                           User=o.User.UserName,
+                           TicketCount=o.TicketCount,
+                           CreatedOn=o.CreatedOn
+                       });
+            
+            return allOrders;
+        }
+        public IEnumerable<OrdersViewModel> GetAllByUser(string username)
+        {
+            var ordersByUser=(from o in context.Orders
+                          join m in context.Movies
+                          on o.MovieId equals m.Id
+                          where o.User.UserName==username
+                          select new OrdersViewModel
+                          {
+                              MovieId = m.Id,
+                              Movie = m.Title,
+                              User = o.User.UserName,
+                              TicketCount = o.TicketCount,
+                              CreatedOn = o.CreatedOn
+                          });
+            return ordersByUser;
         }
 
-        public IEnumerable<Order> AllByUser()
+        public bool MakeOrder(MakeOrderBindingModel model, string username)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool MakeOrder(MakeOrderBindingModel model, string userName)
-        {
-            var user = this.context.Users.SingleOrDefault(u => u.UserName == userName);
+            var user = this.context.Users.SingleOrDefault(u => u.UserName == username);
 
             var movie = this.context.Movies.SingleOrDefault(m => m.Id == model.MovieId);
 

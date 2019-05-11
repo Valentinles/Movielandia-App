@@ -2,16 +2,17 @@
 using Movielandia.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Movielandia.Services.Interfaces
 {
     public interface IOrderService
     {
-        IEnumerable<Order> All();
+        IEnumerable<OrdersViewModel> GetAll();
 
-        IEnumerable<Order> AllByUser();
+        IEnumerable<OrdersViewModel> GetAllByUser(string username);
 
-        bool MakeOrder(MakeOrderBindingModel model, string userName);
+        bool MakeOrder(MakeOrderBindingModel model, string username);
     }
 }

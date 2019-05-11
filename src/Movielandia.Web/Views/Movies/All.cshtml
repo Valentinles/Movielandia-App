@@ -26,7 +26,7 @@
                 var m = orders[i];
 
                 <tr class="row">
-                    <td class="col-md-2">@m.Title</td>
+                    <td class="col-md-2"><a asp-controller="Movies" asp-action="Details" asp-route-id="@m.Id">@m.Title</a></td>
                     <td class="col-md-2">@m.TicketPrice</td>
                     <td class="col-md-2">@m.TotalTickets</td>
                     <td class="col-md-3">

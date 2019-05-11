@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Movielandia.Data;
 using Movielandia.Models;
-using Movielandia.Common.Middlewares;
 using AutoMapper;
 using Movielandia.Services.Implementations;
 using Movielandia.Services.Interfaces;
@@ -43,7 +42,7 @@ namespace Movielandia.Web
             services.AddDbContext<MovielandiaDbContext>(options =>
                options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<MovielandiaUser>(options=> 
+            services.AddIdentity<MovielandiaUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 3;
@@ -52,20 +51,35 @@ namespace Movielandia.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             })
-                .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<MovielandiaDbContext>();
-
-            services.AddAutoMapper();
 
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IOrderService, OrderService>();
 
+            
+
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<MovielandiaDbContext>();
+
+                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+
+                if (!roleManager.RoleExistsAsync("Admin").Result)
+                {
+                    roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -76,8 +90,6 @@ namespace Movielandia.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            app.UseSeedAdminMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
