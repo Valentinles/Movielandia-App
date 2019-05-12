@@ -11,7 +11,7 @@ using Movielandia.Services.Interfaces;
 
 namespace Movielandia.Web.Controllers
 {
-//[Authorize]
+    [Authorize]
     public class MoviesController : Controller
     {
         private readonly IMovieService movieService;
@@ -36,7 +36,7 @@ namespace Movielandia.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return NotFound();
+                return this.View();
             }
 
             var movie = this.movieService.Add(model);
