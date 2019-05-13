@@ -11,10 +11,11 @@
     <table class="table table-hover">
         <thead>
             <tr class="row font-weight-bold">
-                <th class="col-md-2">Title</th>
-                <th class="col-md-2">Ticket Price</th>
-                <th class="col-md-2">Available tickets</th>
-                <th class="col-md-2">Tickets</th>
+                <th class="col-md-2 text-center">Cover</th>
+                <th class="col-md-2 text-center">Title</th>
+                <th class="col-md-2 text-center">Ticket Price</th>
+                <th class="col-md-2 text-center">Available tickets</th>
+                <th class="col-md-2 text-center">Order</th>
             </tr>
         </thead>
         <tbody>
@@ -25,17 +26,19 @@
             {
                 var m = orders[i];
 
-                <tr class="row">
-                    <td class="col-md-2"><a asp-controller="Movies" asp-action="Details" asp-route-id="@m.Id">@m.Title</a></td>
-                    <td class="col-md-2">@m.TicketPrice</td>
-                    <td class="col-md-2">@m.TotalTickets</td>
-                    <td class="col-md-3">
-                        @await Html.PartialAsync("_OrderPartial", new Movielandia.Common.ViewModels.MakeOrderBindingModel
-                        {
-                            MovieId = m.Id
-                        })
-                    </td>
-                </tr>
+            <tr class="row">
+                <td class="col-md-2 text-center">  <img src="@m.CoverUrl" width="50" /> </td>
+                <td class="col-md-2 text-center"><a asp-controller="Movies" asp-action="Details" asp-route-id="@m.Id"><h4>@m.Title</h4></a>
+                </td>
+                <td class="col-md-2 text-center">@m.TicketPrice</td>
+                <td class="col-md-2 text-center">@m.TotalTickets</td>
+                <td class="col-md-3">
+                    @await Html.PartialAsync("_OrderPartial", new Movielandia.Common.ViewModels.MakeOrderBindingModel
+                    {
+                        MovieId = m.Id
+                    })
+                </td>
+            </tr>
             }
         </tbody>
     </table>
