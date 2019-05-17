@@ -3,16 +3,32 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Movielandia.Common.ViewModels;
+using Movielandia.Services.Interfaces;
 using Movielandia.Web.Models;
 
 namespace Movielandia.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMovieService movieService;
+        private readonly IMapper mapper;
+
+        public HomeController(IMovieService movieService, IMapper mapper)
+        {
+            this.movieService = movieService;
+            this.mapper = mapper;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var movie = this.movieService.GetAll().OrderBy(x=>Guid.NewGuid()).FirstOrDefault();
+
+            var movieView = this.mapper.Map<MovieViewModel>(movie);
+
+            return View(movieView);
         }
 
         public IActionResult About()
