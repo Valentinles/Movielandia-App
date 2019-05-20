@@ -14,5 +14,11 @@ namespace Movielandia.Services.Interfaces
         Movie ShowDetails(int id);
 
         bool Add(AddMovieBindingModel model);
+
+        void Delete(int id);
+
+        Movie Get(int id);
+
+        void Edit(EditMovieViewModel model);
     }
 }

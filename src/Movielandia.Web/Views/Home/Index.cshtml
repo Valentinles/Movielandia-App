@@ -1,27 +1,46 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model Movielandia.Common.ViewModels.MovieViewModel
+@model IEnumerable<Movielandia.Common.ViewModels.AllMoviesViewModel>
 
 @inject SignInManager<Movielandia.Models.MovielandiaUser> SignInManager
 @inject UserManager<Movielandia.Models.MovielandiaUser> UserManager
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<div class="text-center">
+    <h1>Welcome to Movielandia, @UserManager.GetUserName(User)!</h1>
+</div>
+<hr />
+<div class="row">
+    @foreach (var m in Model.Take(3))
+    {
 
-    <div class="text-center">
-        <img src="@Model.CoverUrl" width="200" />
-        <h2>@Model.Title</h2>
-        <button id="showMore">Show more</button>
-    </div>
+        <div class="card mx-auto" style="width: 205px;">
+            <img class="card-img-top" style=" width: 205px;" src="@m.CoverUrl" />
+            <div class="card-body">
+                <h5 class="card-title text-center">@m.Title</h5>
+                <hr />
+                <div class="info">
+                    <p class="lead">
+                        <small>By @m.Creator</small>
+                        <br />
+                        <small>Genre: @m.Genre</small>
+                        <br />
+                        <small><a asp-area="" asp-controller="Movies" asp-action="All">Ticket price: @m.TicketPrice $</a></small>
+                    </p>
+                </div>
+                <div class="buttonsForCard" style="text-align: center;">
+                    <a class="btn btn-outline-secondary"  role="button">More</a>
+                    <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@m.Id" class="btn btn-outline-secondary" role="button">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-    <div id="showIt">
-        <p>Creator, @Model.Creator</p>
-        <p>Storyline @Model.Storyline</p>
-    </div>
-
-    <script>
-
-        $(function () {
-            $("#showMore").click(function () {
-                $("#showIt").slideToggle();
-            });
+<script>
+    $(function () {
+        $(".info").hide();
+        $(".buttonsForCard").click(function () {
+            $(this).prev(".info").slideToggle();
         });
-    </script>
+    });
+</script>

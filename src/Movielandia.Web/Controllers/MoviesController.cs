@@ -68,5 +68,55 @@ namespace Movielandia.Web.Controllers
 
             return this.View(movieView);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var movie = this.movieService.Get(id);
+
+            if (movie == null)
+            {
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            var viewModel =this.mapper.Map<EditMovieViewModel>(movie);
+
+            return this.View(viewModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult Delete(EditMovieViewModel model, int id)
+        {
+            this.movieService.Delete(id);
+
+            return RedirectToAction("All", "Movies");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var movie = this.movieService.Get(id);
+
+            if (movie == null)
+            {
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            var viewModel = this.mapper.Map<EditMovieViewModel>(movie);
+
+            return this.View(viewModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult Edit(EditMovieViewModel model)
+        {
+            this.movieService.Edit(model);
+
+            return this.RedirectToAction("All", "Movies");
+        }
     }
 }

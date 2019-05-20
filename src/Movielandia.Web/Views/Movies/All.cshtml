@@ -13,10 +13,17 @@
             <tr class="row font-weight-bold">
                 <th class="col-md-2 text-center">Cover</th>
                 <th class="col-md-2 text-center">Title</th>
-                <th class="col-md-2 text-center">Ticket Price</th>
+                <th class="col-md-1 text-center">Ticket Price</th>
                 <th class="col-md-2 text-center">Available tickets</th>
                 <th class="col-md-2 text-center">Order</th>
-            </tr>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <th class="col-md-2 text-center">Delete/Edit</th>
+                    }
+                }
+                    </tr>
         </thead>
         <tbody>
             @{
@@ -28,19 +35,32 @@
 
             <tr class="row">
                 <td class="col-md-2 text-center">  <img src="@m.CoverUrl" width="50" /> </td>
-                <td class="col-md-2 text-center"><a asp-controller="Movies" asp-action="Details" asp-route-id="@m.Id"><h4>@m.Title</h4></a>
+                <td class="col-md-2 text-center">
+                    <a asp-controller="Movies" asp-action="Details" asp-route-id="@m.Id"><h4>@m.Title</h4></a>
                 </td>
-                <td class="col-md-2 text-center">@m.TicketPrice</td>
+                <td class="col-md-1 text-center">@m.TicketPrice $</td>
                 <td class="col-md-2 text-center">@m.TotalTickets</td>
-                <td class="col-md-3">
+                <td class="col-md-2">
                     @await Html.PartialAsync("_OrderPartial", new Movielandia.Common.ViewModels.MakeOrderBindingModel
                     {
                         MovieId = m.Id
                     })
                 </td>
-            </tr>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td class="col-md-2 text-center">
+                            <a asp-controller="Movies" asp-action="Delete" asp-route-id="@m.Id">Delete</a>
+                            /
+                            <a asp-controller="Movies" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
+                        </td>
+                    }
+                }
+                    </tr>
             }
         </tbody>
     </table>
+    </main>
 
 

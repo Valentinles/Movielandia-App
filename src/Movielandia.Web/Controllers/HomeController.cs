@@ -24,11 +24,11 @@ namespace Movielandia.Web.Controllers
 
         public IActionResult Index()
         {
-            var movie = this.movieService.GetAll().OrderBy(x=>Guid.NewGuid()).FirstOrDefault();
 
-            var movieView = this.mapper.Map<MovieViewModel>(movie);
+            var movies = (this.movieService.GetAll().OrderBy(x => Guid.NewGuid())
+                .Select(this.mapper.Map<AllMoviesViewModel>));
 
-            return View(movieView);
+            return View(movies);
         }
 
         public IActionResult About()

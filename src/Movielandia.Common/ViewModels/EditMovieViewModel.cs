@@ -1,13 +1,11 @@
-﻿using Movielandia.Common.Mapper;
-using Movielandia.Models;
-using Movielandia.Models.Enums;
+﻿using Movielandia.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Movielandia.Common.ViewModels
 {
-    public class MovieViewModel 
+    public class EditMovieViewModel
     {
         public int Id { get; set; }
 
