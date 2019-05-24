@@ -12,6 +12,8 @@ using Shouldly;
 using System.Linq;
 using AutoMapper;
 using Movielandia.Common.Mapper;
+using System.Threading;
+using Movielandia.Common.ViewModels;
 
 namespace Movielandia.Tests
 {
@@ -51,6 +53,84 @@ namespace Movielandia.Tests
             var result = service.GetAll().Count();
 
             result.ShouldBe(1);
+        }
+
+        [Fact]
+        public void GetAll_WithoutData_ShouldReturnEmpty()
+        {
+            Thread.Sleep(1000);
+
+            var result = service.GetAll().ToList();
+
+            result.ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void ShowDetails_FindById_ShouldReturnMovie()
+        {
+            var movie = new Movie()
+            {
+                Id = 5,
+                Title = "test",
+                CoverUrl = "test",
+                Creator = "test",
+                Storyline = "test",
+                TicketPrice = 1,
+                TotalTickets = 1
+            };
+
+            context.Movies.Add(movie);
+            context.SaveChanges();
+
+            var result = service.ShowDetails(5);
+
+            result.ShouldBeSameAs(movie);
+        }
+
+        [Fact]
+        public void ShowDetails_FindById_ShouldNotReturnCorrectMovie()
+        {
+            var movie = new Movie()
+            {
+                Id = 7,
+                Title = "test",
+                CoverUrl = "test",
+                Creator = "test",
+                Storyline = "test",
+                TicketPrice = 1,
+                TotalTickets = 1
+            };
+
+            context.Movies.Add(movie);
+            context.SaveChanges();
+
+            var result = service.ShowDetails(5);
+
+            result.ShouldNotBeSameAs(movie);
+        }
+
+        [Fact]
+        public void Delete_Movie_ShouldDeleteMovie()
+        {
+            var movie = new Movie()
+            {
+                Id=1,
+                Title = "test",
+                CoverUrl = "test",
+                Creator = "test",
+                Storyline = "test",
+                TicketPrice = 1,
+                TotalTickets = 1
+            };
+
+            context.Movies.Add(movie);
+            context.SaveChanges();
+
+            service.Delete(1);
+
+            var result = service.GetAll().ToList();
+
+            result.ShouldBeEmpty();
         }
     }
 }
