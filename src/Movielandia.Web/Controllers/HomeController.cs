@@ -14,19 +14,17 @@ namespace Movielandia.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IMovieService movieService;
-        private readonly IMapper mapper;
 
-        public HomeController(IMovieService movieService, IMapper mapper)
+        public HomeController(IMovieService movieService)
         {
             this.movieService = movieService;
-            this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
 
             var movies = (this.movieService.GetAll().OrderBy(x => Guid.NewGuid())
-                .Select(this.mapper.Map<AllMoviesViewModel>));
+                .Select(Mapper.Map<AllMoviesViewModel>));
 
             return View(movies);
         }

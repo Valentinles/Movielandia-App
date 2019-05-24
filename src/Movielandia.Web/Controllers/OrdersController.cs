@@ -14,12 +14,10 @@ namespace Movielandia.Web.Controllers
     {
         private readonly IOrderService orderService;
         private readonly IMovieService movieService;
-        private readonly IMapper mapper;
 
-        public OrdersController(IOrderService orderService, IMapper mapper, IMovieService movieService)
+        public OrdersController(IOrderService orderService, IMovieService movieService)
         {
             this.orderService = orderService;
-            this.mapper = mapper;
             this.movieService = movieService;
         }
 

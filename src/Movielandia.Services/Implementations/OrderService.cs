@@ -13,11 +13,9 @@ namespace Movielandia.Services.Implementations
 {
     public class OrderService : DataService, IOrderService
     {
-        private readonly IMapper mapper;
 
-        public OrderService(MovielandiaDbContext context, IMapper mapper) : base(context)
+        public OrderService(MovielandiaDbContext context) : base(context)
         {
-            this.mapper = mapper;
         }
 
         public IEnumerable<OrdersViewModel> GetAll()
@@ -64,7 +62,7 @@ namespace Movielandia.Services.Implementations
                 return false;
             }
 
-            var order = this.mapper.Map<Order>(model);
+            var order = Mapper.Map<Order>(model);
 
             order.User = user;
             order.CreatedOn = DateTime.Now;

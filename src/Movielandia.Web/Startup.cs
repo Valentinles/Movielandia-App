@@ -59,9 +59,9 @@ namespace Movielandia.Web
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IOrderService, OrderService>();
 
-            
-
+            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperConfig>());
             services.AddAutoMapper();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

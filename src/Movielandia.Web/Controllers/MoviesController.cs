@@ -15,12 +15,10 @@ namespace Movielandia.Web.Controllers
     public class MoviesController : Controller
     {
         private readonly IMovieService movieService;
-        private readonly IMapper mapper;
 
-        public MoviesController(IMovieService movieService, IMapper mapper)
+        public MoviesController(IMovieService movieService)
         {
             this.movieService = movieService;
-            this.mapper = mapper;
         }
 
         [Authorize(Roles ="Admin")]
@@ -47,7 +45,7 @@ namespace Movielandia.Web.Controllers
         public IActionResult All()
         {
             var movies = (this.movieService.GetAll())
-                .Select(this.mapper.Map<AllMoviesViewModel>);
+                .Select(Mapper.Map<AllMoviesViewModel>);
 
             return View(new MovieOrderViewModel()
             {
@@ -64,7 +62,7 @@ namespace Movielandia.Web.Controllers
                 return  NotFound();
             }
             
-            var movieView =  this.mapper.Map<MovieViewModel>(movie);
+            var movieView =  Mapper.Map<MovieViewModel>(movie);
 
             return this.View(movieView);
         }
@@ -80,7 +78,7 @@ namespace Movielandia.Web.Controllers
                 return this.RedirectToAction("Index", "Home");
             }
 
-            var viewModel =this.mapper.Map<EditMovieViewModel>(movie);
+            var viewModel =Mapper.Map<EditMovieViewModel>(movie);
 
             return this.View(viewModel);
         }
@@ -105,7 +103,7 @@ namespace Movielandia.Web.Controllers
                 return this.RedirectToAction("Index", "Home");
             }
 
-            var viewModel = this.mapper.Map<EditMovieViewModel>(movie);
+            var viewModel = Mapper.Map<EditMovieViewModel>(movie);
 
             return this.View(viewModel);
         }

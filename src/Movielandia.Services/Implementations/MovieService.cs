@@ -15,16 +15,15 @@ namespace Movielandia.Services.Implementations
 {
     public class MovieService : DataService, IMovieService
     {
-        private readonly IMapper mapper;
+        //public readonly IMapper mapper;
 
-        public MovieService(MovielandiaDbContext context, IMapper mapper) : base(context)
+        public MovieService(MovielandiaDbContext context) : base(context)
         {
-            this.mapper = mapper;
         }
 
         public bool Add(AddMovieBindingModel model)
         {
-            var movie = this.mapper.Map<Movie>(model);
+            var movie = Mapper.Map<Movie>(model);
 
             this.context.Movies.Add(movie);
 
