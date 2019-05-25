@@ -6,14 +6,18 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <div class="text-center">
-    <h1>Welcome to Movielandia, @UserManager.GetUserName(User)!</h1>
+    <h1 class="lead" style="font-size: 45px; ">Welcome to Movielandia, @UserManager.GetUserName(User)!</h1>
+    <h1 class="lead">
+        Explore the world of movies with our offers -<a asp-area="" asp-controller="Movies" asp-action="All"> see all movies</a>
+    </h1>
 </div>
 <hr />
+
 <div class="row">
     @foreach (var m in Model.Take(3))
     {
 
-        <div class="card mx-auto" style="width: 205px;">
+        <div class="card mx-auto bg-light" style="width: 205px;">
             <img class="card-img-top" style=" width: 205px;" src="@m.CoverUrl" />
             <div class="card-body">
                 <h5 class="card-title text-center">@m.Title</h5>

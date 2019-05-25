@@ -3,11 +3,24 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <p>@Model.Title</p>
-    <img src="@Model.CoverUrl" width="300"/>
-    <p>@Model.Storyline</p>
+<div class="container-fluid" align="center">
+    <h1 class="lead text-center" style="font-size: 45px; ">@Model.Title</h1>
+    <h1 class="lead text-center" style="font-size: 20px; ">@Model.Genre</h1>
+    <h1 class="lead text-center" style="font-size: 25px; ">by @Model.Creator</h1>
+    <hr />
+    <div class="row">
+        <div class="col-sm">
+            <img src="@Model.CoverUrl" width="350" class="rounded" />
+        </div>
+        <div class="col-sm">
+            <p class="lead">Storyline</p>
+            <p class="text-justify lead" style="font-size: 18px;">@Model.Storyline</p>
+        </div>
+    </div>
 </div>
+
+
+
+
 
