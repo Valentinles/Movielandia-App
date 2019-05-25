@@ -1,6 +1,6 @@
 using System;
 
-namespace Movielandia.Web.Models
+namespace Movielandia.Common.ViewModels
 {
     public class ErrorViewModel
     {

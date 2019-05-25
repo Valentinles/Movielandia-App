@@ -7,7 +7,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Movielandia.Common.ViewModels;
 using Movielandia.Services.Interfaces;
-using Movielandia.Web.Models;
 
 namespace Movielandia.Web.Controllers
 {
