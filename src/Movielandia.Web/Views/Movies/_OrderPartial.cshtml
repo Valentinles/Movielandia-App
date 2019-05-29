@@ -7,7 +7,7 @@
             <input class="form-control" min="1" asp-for="TicketCount" />
             <span asp-validation-for="TicketCount" class="text-danger"></span>
         </div>
-        <button type="submit">Order</button>
+        <button type="submit" class="btn btn-outline-success">Order</button>
     </div>
     <input type="hidden" asp-for="MovieId" value="@Model.MovieId">
 </form>

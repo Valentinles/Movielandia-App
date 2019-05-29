@@ -48,9 +48,9 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <td class="col-md-2 text-center">
-                            <a asp-controller="Movies" asp-action="Delete" asp-route-id="@m.Id">Delete</a>
+                            <a asp-controller="Movies" asp-action="Delete" asp-route-id="@m.Id" class="btn btn-outline-danger">Delete</a>
                             /
-                            <a asp-controller="Movies" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
+                            <a asp-controller="Movies" asp-action="Edit" asp-route-id="@m.Id" class="btn btn-outline-warning">Edit</a>
                         </td>
                     }
                 }
