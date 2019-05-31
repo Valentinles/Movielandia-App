@@ -21,7 +21,7 @@
 - In your *package manger console* type 
 
 ```
-update-databse
+update-database
 ```
 - **Important!** The **first** registered account will be promoted to **admin** and every other will be a **normal user**.
 
