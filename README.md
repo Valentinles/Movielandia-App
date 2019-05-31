@@ -33,4 +33,4 @@ update-databse
 - Bootstrap 4.0
 - HTML
 - CSS
--jQuery
+- jQuery
