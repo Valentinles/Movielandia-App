@@ -1,5 +1,5 @@
 # Movielandia
-**Movielandia** is a open-source .NET Core MVC project where *users* can order tickets for movies. They can see the movies, read short information about specific movie, make orders and take a look at their orders. The *admin* can create/delete/edit movies, change the prices of the tickets and also can see all made orders from the users. [Gallery](https://github.com/Valentinles/Movielandia-App/wiki/Gallery) 
+**Movielandia** is a open-source .NET Core MVC project where *users* can order tickets for movies. They can see the movies, read short information about specific movie, make orders and take a look at their orders. The *admin* can create/delete/edit movies, change the prices of the tickets and also can see all made orders from the users. Movielandia's look in browser - [Gallery](https://github.com/Valentinles/Movielandia-App/wiki/Gallery) 
 ## Getting Started
 
 ###### Run the application:
