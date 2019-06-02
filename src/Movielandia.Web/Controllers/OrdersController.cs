@@ -34,7 +34,7 @@ namespace Movielandia.Web.Controllers
             
             if(!result)
             {
-                return this.View(); 
+                return NotFound(); 
             }
 
             return this.RedirectToAction("All", "Movies");
